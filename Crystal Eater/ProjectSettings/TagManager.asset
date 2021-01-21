@@ -6,6 +6,7 @@ TagManager:
   tags:
   - food
   - poison
+  - pause
   layers:
   - Default
   - TransparentFX
