@@ -4,9 +4,9 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - food
-  - poison
   - pause
+  - Snake
+  - Food
   layers:
   - Default
   - TransparentFX
@@ -41,12 +41,6 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: Background
-    uniqueID: 2418715283
-    locked: 0
   - name: Default
     uniqueID: 0
-    locked: 0
-  - name: Over
-    uniqueID: 1953473469
     locked: 0
