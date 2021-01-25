@@ -6,7 +6,7 @@ public class Snake : MonoBehaviour
 {
     public Snake next;
 
-    public void SetNext(Snake IN)
+    public void Setnext(Snake IN)
     {
         next = IN;
     }

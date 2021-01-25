@@ -32,6 +32,11 @@ public class GameController : MonoBehaviour
         GameObject temp;
         nextPos = head.transform.position;
 
+        if(head.transform == null)
+        {
+            return;
+        }
+
         switch (NESW)
         {
             case 0:
@@ -48,7 +53,7 @@ public class GameController : MonoBehaviour
                 break;
         }
         temp = (GameObject)Instantiate(snakePrefab, nextPos, transform.rotation);
-        head.SetNext(temp.GetComponent<Snake>());
+        head.Setnext(temp.GetComponent<Snake>());
         head = temp.GetComponent<Snake>();
 
         return;
