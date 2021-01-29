@@ -4,27 +4,53 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
+    public int maxSize;
+    public int currentSize;
+    public int xBound;
+    public int yBound;
+    public int score;
+    public GameObject foodPrefab;
+    public GameObject currentFood;
     public GameObject snakePrefab;
     public Snake head;
     public Snake tail;
     public int NESW;
     public Vector2 nextPos;
 
+    void OnEnable()
+    {
+        Snake.hit += hit;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        InvokeRepeating("TimerInvoke", 0, .5f);
+        InvokeRepeating("TimerInvoke", 0, .15f);
+        FoodFunction();
+    }
+
+    void OnDisable()
+    {
+        Snake.hit -= hit;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        ComChangeD();
     }
 
     void TimerInvoke()
     {
         Movement();
+        if(currentSize >= maxSize)
+        {
+            TailFunction();
+        }
+        else
+        {
+            currentSize++;
+        }
     }
 
     void Movement()
@@ -57,5 +83,64 @@ public class GameController : MonoBehaviour
         head = temp.GetComponent<Snake>();
 
         return;
+    }
+
+    void ComChangeD()
+    {
+        if(NESW != 2 && Input.GetKeyDown(KeyCode.W))
+        {
+            NESW = 0;
+        }
+        if (NESW != 3 && Input.GetKeyDown(KeyCode.D))
+        {
+            NESW = 1;
+        }
+        if (NESW != 0 && Input.GetKeyDown(KeyCode.S))
+        {
+            NESW = 2;
+        }
+        if (NESW != 1 && Input.GetKeyDown(KeyCode.A))
+        {
+            NESW = 3;
+        }
+    }
+
+    void TailFunction()
+    {
+        Snake tempSnake = tail;
+        tail = tail.GetNext();
+        tempSnake.RemoveTail();
+    }
+
+    void FoodFunction()
+    {
+        int xPos = Random.Range(-xBound, xBound);
+        int yPos = Random.Range(-yBound, yBound);
+
+        currentFood = (GameObject)Instantiate(foodPrefab, new Vector2(xPos, yPos), transform.rotation);
+        StartCoroutine(CheckRender(currentFood));
+    }
+
+    IEnumerator CheckRender(GameObject IN)
+    {
+        yield return new WaitForEndOfFrame();
+        if(IN.GetComponent<Renderer>().isVisible == false)
+        {
+            if(IN.tag == "Food")
+            {
+                Destroy(IN);
+                FoodFunction();
+            }
+        }
+    }
+
+    void hit(string WhatWasSent)
+    {
+        if(WhatWasSent == "Food")
+        {
+            FoodFunction();
+            maxSize++;
+            score++;
+        }
     }
 }
