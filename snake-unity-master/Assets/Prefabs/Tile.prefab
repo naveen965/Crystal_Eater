@@ -1,0 +1,108 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1768276262531890
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 224871769639816630}
+  - component: {fileID: 222270649043682150}
+  - component: {fileID: 114276769721457132}
+  - component: {fileID: 114613251576345354}
+  m_Layer: 5
+  m_Name: Tile
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &224871769639816630
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1768276262531890}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 10, y: -10}
+  m_SizeDelta: {x: 20, y: 20}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &222270649043682150
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1768276262531890}
+  m_CullTransparentMesh: 0
+--- !u!114 &114276769721457132
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1768276262531890}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: ee4adf5488159e946ac6312239ae00e2, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!114 &114613251576345354
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1768276262531890}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cfe7640627e58b439830e2294849cc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Empty: {fileID: 21300000, guid: ee4adf5488159e946ac6312239ae00e2, type: 3}
+  Apple: {fileID: 21300000, guid: b39e04d974322394db93148fcae32eca, type: 3}
+  SnakesHead: {fileID: 21300000, guid: 73372f1d56f1b43459d280c5fd5ccd66, type: 3}
+  SnakesBody: {fileID: 21300000, guid: f4641eb4d9ec4cf4ebb758ad44e032a2, type: 3}
+  SnakesTail: {fileID: 21300000, guid: 7a9d3d3e53951d940be43cab032b0668, type: 3}
+  SnakesBulge: {fileID: 21300000, guid: 1d422dffaca3b3c4f808118295ef02cb, type: 3}
+  SnakesL: {fileID: 21300000, guid: fde7ca078a737d942b6b9141050a2379, type: 3}
+  SnakesLBulged: {fileID: 21300000, guid: 98abe12548a1db046a1b24147516ca01, type: 3}
+  Bonuses:
+  - {fileID: 21300000, guid: 655da570a072c104386aacad5247d10e, type: 3}
+  - {fileID: 21300000, guid: 4ba4750e6efd2b7428195f9330d00f8f, type: 3}
+  - {fileID: 21300000, guid: d4a4326c16ce921458a2d5ed7fcf2819, type: 3}
+  - {fileID: 21300000, guid: e228db5afc3a62046949414e2f47de06, type: 3}
+  - {fileID: 21300000, guid: 6d38252b1a3ac184aaf9c69a47237931, type: 3}
+  - {fileID: 21300000, guid: 6b3c3486a6e16c847a3dc86bc306a03c, type: 3}
+  - {fileID: 21300000, guid: 8d19836dbb466fc4e8dce3cbb1ce36cc, type: 3}
+  - {fileID: 21300000, guid: 606af25c815785f409209197a5986246, type: 3}
+  - {fileID: 21300000, guid: e7e97314465d4d44b8b9562e59f8a8d4, type: 3}
