@@ -372,6 +372,6 @@ public class Game : MonoBehaviour
         }
 
         // Show "game over" panel
-        ShowGameOver();
+        //ShowGameOver();
     }
 }
