@@ -21,6 +21,8 @@ public class Game : MonoBehaviour
     /// </summary>
     private SoundManager soundManager;
 
+    private TimeCountDown timeCountDown;
+
     private Snake snake;
 
     /// <summary>
@@ -172,6 +174,13 @@ public class Game : MonoBehaviour
                 return;
             }
 
+            /*if (timeCountDown.secondsLeft == 0)
+            {
+                // Snake has bitten its tail - game over
+                StartCoroutine(GameOverCoroutine());
+                return;
+            }*/
+
             if (x >= 0 && x < Board.Columns && y >= 0 && y < Board.Rows)
             {
                 if (head == applePosition)
@@ -179,6 +188,7 @@ public class Game : MonoBehaviour
                     soundManager.PlayAppleSoundEffect();
                     snake.Move(dir, true);
                     Score += 1;
+                    //timeCountDown.secondsLeft += 5;
                     PlantAnApple();
                 }
                 else if (head == bonusPosition && bonusActive)
@@ -186,6 +196,7 @@ public class Game : MonoBehaviour
                     soundManager.PlayBonusSoundEffect();
                     snake.Move(dir, true);
                     Score += 10;
+                    //timeCountDown.secondsLeft += 10;
                     StopCoroutine(bonusCoroutine);
                     PlantABonus();
                 }
@@ -372,6 +383,6 @@ public class Game : MonoBehaviour
         }
 
         // Show "game over" panel
-        //ShowGameOver();
+        ShowGameOver();
     }
 }
