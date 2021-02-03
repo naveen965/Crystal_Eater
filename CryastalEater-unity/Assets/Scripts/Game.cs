@@ -181,7 +181,7 @@ public class Game : MonoBehaviour
                 return;
             }*/
 
-            if (x >= 0 && x < Board.Columns && y >= 0 && y < Board.Rows)
+            if (timeCountDown.secondsLeft != 0)
             {
                 if (head == applePosition)
                 {
