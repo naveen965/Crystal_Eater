@@ -8,6 +8,7 @@ public class TimeCountDown : MonoBehaviour
     public GameObject textDisplay;
     public int secondsLeft = 30;
     public bool takingAway = false;
+    public Game game;
 
     // Start is called before the first frame update
     void Start()
