@@ -14,6 +14,28 @@ public class SnakeMovement : MonoBehaviour
     private Transform curBodyPart;
     private Transform PrevBodypart;
 
+    /// <summary>
+    /// Hides the snake.
+    /// </summary>
+    public void Hide()
+    {
+        foreach (var p in body)
+        {
+            board[p].ContentHidden = true;
+        }
+    }
+
+    /// <summary>
+    /// Shows the snake.
+    /// </summary>
+    public void Show()
+    {
+        foreach (var p in body)
+        {
+            board[p].ContentHidden = false;
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -39,10 +61,15 @@ public class SnakeMovement : MonoBehaviour
         if (Input.GetKey(KeyCode.W))
             curspeed *= 2;
 
-        BodyParts[0].Translate(BodyParts[0].forward * curspeed * Time.smoothDeltaTime, Space.World);
+        BodyParts[0].Translate(BodyParts[0].up * curspeed * Time.smoothDeltaTime, Space.World);
+
+        /*if (Input.GetKey(KeyCode.A))
+            BodyParts[0].Rotate(new Vector3(0f, 0f, -1f) * rotationspeed * Time.deltaTime * Input.GetAxis("Horizontal"));
+        if (Input.GetKey(KeyCode.D))
+            BodyParts[0].Rotate(new Vector3(0f, 0f, 1f) * rotationspeed * Time.deltaTime * Input.GetAxis("Horizontal"));*/
 
         if (Input.GetAxis("Horizontal") != 0)
-            BodyParts[0].Rotate(Vector3.up * rotationspeed * Time.deltaTime * Input.GetAxis("Horizontal"));
+            BodyParts[0].Rotate(Vector3.back * rotationspeed * Time.deltaTime * Input.GetAxis("Horizontal"));
 
         for (int i = 1; i < BodyParts.Count; i++)
         {
@@ -53,7 +80,7 @@ public class SnakeMovement : MonoBehaviour
 
             Vector3 newpos = PrevBodypart.position;
 
-            newpos.y = BodyParts[0].position.y;
+            newpos.z = BodyParts[0].position.z;
 
             float T = Time.deltaTime * dis / mindistance * curspeed;
 
