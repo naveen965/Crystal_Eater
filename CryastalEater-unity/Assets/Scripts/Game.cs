@@ -40,6 +40,7 @@ public class Game : MonoBehaviour
     /// </summary>
     private bool bonusActive;
 
+
     /// <summary>
     /// Game controller.
     /// </summary>
@@ -181,7 +182,9 @@ public class Game : MonoBehaviour
                 return;
             }*/
 
-            if (timeCountDown.secondsLeft != 0)
+            /// x >= 0 && x < Board.Columns && y >= 0 && y < Board.Rows
+
+            if (x >= 0 && x < Board.Columns && y >= 0 && y < Board.Rows)
             {
                 if (head == applePosition)
                 {
