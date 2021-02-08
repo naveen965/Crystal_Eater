@@ -1,8 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using Unity.Entities;
+using Unity.Mathematics;
+using Unity.Tiny.Core2D;
+using Unity.Tiny.Input;
 
-public class SnakeMovement : MonoBehaviour
+public class SnakeMovement : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
     public List<Transform> BodyParts = new List<Transform>();
     public float mindistance = 0.25f;
@@ -13,8 +18,12 @@ public class SnakeMovement : MonoBehaviour
     private float dis;
     private Transform curBodyPart;
     private Transform PrevBodypart;
+    public GameObject leftButton;
+    public GameObject RightButton;
+    bool isPressed = false;
+    ///public GameObject Snake;
 
-    /// <summary>
+    /*/// <summary>
     /// Hides the snake.
     /// </summary>
     public void Hide()
@@ -34,7 +43,7 @@ public class SnakeMovement : MonoBehaviour
         {
             board[p].ContentHidden = false;
         }
-    }
+    }*/
 
     // Start is called before the first frame update
     void Start()
@@ -50,8 +59,40 @@ public class SnakeMovement : MonoBehaviour
     {
         Move();
 
+        if (isPressed && leftButton)
+        {
+            RotateLeft();
+        }
+
+        if (isPressed && RightButton)
+        {
+            RotateRight();
+        }
+
         if (Input.GetKey(KeyCode.Q))
             AddBodyPart();
+    }
+
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        isPressed = true;
+    }
+
+    public void OnPointerUp(PointerEventData eventData)
+    {
+        isPressed = false;
+    }
+
+    public void RotateLeft()
+    {
+        if (Input.GetMouseButton(0))
+            BodyParts[0].Rotate(Vector3.back * rotationspeed * Time.deltaTime * Input.GetAxis("Horizontal"));
+    }
+
+    public void RotateRight()
+    {
+        if (Input.GetMouseButton(0))
+            BodyParts[0].Rotate(Vector3.back * rotationspeed * Time.deltaTime * Input.GetAxis("Horizontal"));
     }
 
     public void Move()
@@ -69,6 +110,9 @@ public class SnakeMovement : MonoBehaviour
             BodyParts[0].Rotate(new Vector3(0f, 0f, 1f) * rotationspeed * Time.deltaTime * Input.GetAxis("Horizontal"));*/
 
         if (Input.GetAxis("Horizontal") != 0)
+            BodyParts[0].Rotate(Vector3.back * rotationspeed * Time.deltaTime * Input.GetAxis("Horizontal"));
+
+        if (Input.GetMouseButton(0))
             BodyParts[0].Rotate(Vector3.back * rotationspeed * Time.deltaTime * Input.GetAxis("Horizontal"));
 
         for (int i = 1; i < BodyParts.Count; i++)
