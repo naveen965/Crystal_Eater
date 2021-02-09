@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using Unity.Entities;
+/*using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Tiny.Core2D;
-using Unity.Tiny.Input;
+using Unity.Tiny.Input;*/
 
 public class SnakeMovement : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
@@ -109,11 +109,14 @@ public class SnakeMovement : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
         if (Input.GetKey(KeyCode.D))
             BodyParts[0].Rotate(new Vector3(0f, 0f, 1f) * rotationspeed * Time.deltaTime * Input.GetAxis("Horizontal"));*/
 
-        if (Input.GetAxis("Horizontal") != 0)
+        if (Input.GetKey(KeyCode.A))
             BodyParts[0].Rotate(Vector3.back * rotationspeed * Time.deltaTime * Input.GetAxis("Horizontal"));
 
-        if (Input.GetMouseButton(0))
+        if (Input.GetKey(KeyCode.D))
             BodyParts[0].Rotate(Vector3.back * rotationspeed * Time.deltaTime * Input.GetAxis("Horizontal"));
+
+        /*if (Input.GetMouseButton(0))
+            BodyParts[0].Rotate(Vector3.back * rotationspeed * Time.deltaTime * Input.GetAxis("Horizontal"));*/
 
         for (int i = 1; i < BodyParts.Count; i++)
         {
