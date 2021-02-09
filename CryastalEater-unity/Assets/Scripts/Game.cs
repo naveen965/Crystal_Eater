@@ -21,7 +21,21 @@ public class Game : MonoBehaviour
     /// </summary>
     private SoundManager soundManager;
 
-    private TimeCountDown timeCountDown;
+    public TimeCountDown timeCountDown;
+
+    private int _secondsLeft;
+
+    public int SecondsLeft
+    {
+        get
+        {
+            return _secondsLeft;
+        }
+        set
+        {
+            _secondsLeft = value;
+        }
+    }
 
     private Snake snake;
 
@@ -175,7 +189,7 @@ public class Game : MonoBehaviour
                 return;
             }
 
-            /*if (timeCountDown.secondsLeft == 0)
+            /*if (timeCountDown.SecondsLeft == 0)
             {
                 // Snake has bitten its tail - game over
                 StartCoroutine(GameOverCoroutine());
@@ -191,7 +205,7 @@ public class Game : MonoBehaviour
                     soundManager.PlayAppleSoundEffect();
                     snake.Move(dir, true);
                     Score += 1;
-                    //timeCountDown.secondsLeft += 5;
+                    timeCountDown.SecondsLeft += 2;
                     PlantAnApple();
                 }
                 else if (head == bonusPosition && bonusActive)
@@ -199,7 +213,7 @@ public class Game : MonoBehaviour
                     soundManager.PlayBonusSoundEffect();
                     snake.Move(dir, true);
                     Score += 10;
-                    //timeCountDown.secondsLeft += 10;
+                    timeCountDown.SecondsLeft += 5;
                     StopCoroutine(bonusCoroutine);
                     PlantABonus();
                 }
@@ -280,6 +294,9 @@ public class Game : MonoBehaviour
 
         // Resets snake
         snake.Reset();
+
+        // Resets timeCountDown
+        timeCountDown.Reset();
 
         // Plant an apple
         PlantAnApple();
@@ -372,6 +389,8 @@ public class Game : MonoBehaviour
 
         // Stop bonus coroutine
         StopCoroutine(bonusCoroutine);
+
+        timeCountDown.StopTime();
 
         // Pause the game
         Paused = true;
