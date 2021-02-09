@@ -6,22 +6,39 @@ using UnityEngine.UI;
 public class TimeCountDown : MonoBehaviour
 {
     public GameObject textDisplay;
-    public int secondsLeft = 30;
+    private int _secondsLeft = 30;
+    private IEnumerator timerTake;
+    public int SecondsLeft {
+        get
+        {
+            return this._secondsLeft;
+        }
+        set
+        {
+            this._secondsLeft = value;
+        } 
+    }
     public bool takingAway = false;
-    public Game game;
+    //public Game game;
+
+    /*public TimeCountDown()
+    {
+        SecondsLeft = 30;
+    }*/
 
     // Start is called before the first frame update
     void Start()
     {
-        textDisplay.GetComponent<Text>().text = "00:" + secondsLeft;
+        textDisplay.GetComponent<Text>().text = "00:" + SecondsLeft;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (takingAway == false && secondsLeft > 0)
+        if (takingAway == false && SecondsLeft > 0)
         {
-            StartCoroutine(TimerTake());
+            timerTake = TimerTake();
+            StartCoroutine(timerTake);
         }
     }
 
@@ -29,15 +46,26 @@ public class TimeCountDown : MonoBehaviour
     {
         takingAway = true;
         yield return new WaitForSeconds(1);
-        secondsLeft -= 1;
-        if(secondsLeft < 10)
+        SecondsLeft -= 1;
+        if(SecondsLeft < 10)
         {
-            textDisplay.GetComponent<Text>().text = "00:0" + secondsLeft;
+            textDisplay.GetComponent<Text>().text = "00:0" + SecondsLeft;
         }
         else
         {
-            textDisplay.GetComponent<Text>().text = "00:" + secondsLeft;
+            textDisplay.GetComponent<Text>().text = "00:" + SecondsLeft;
         }
         takingAway = false;
+    }
+
+    public void StopTime()
+    {
+        StopCoroutine(timerTake);
+        Debug.Log("Stop Time Countdown");
+    }
+
+    public void Reset()
+    {
+        SecondsLeft = 30; 
     }
 }
