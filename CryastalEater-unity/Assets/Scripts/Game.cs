@@ -39,6 +39,8 @@ public class Game : MonoBehaviour
 
     private Snake snake;
 
+    private SnakeMovement snakeMovement;
+
     /// <summary>
     /// Position of an apple (1 point fruit).
     /// </summary>
@@ -178,6 +180,7 @@ public class Game : MonoBehaviour
 
             // New head position
             var head = snake.NextHeadPosition(dir);
+            //var head1 = snakeMovement.
 
             var x = head.x;
             var y = head.y;

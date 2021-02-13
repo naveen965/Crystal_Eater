@@ -21,29 +21,6 @@ public class SnakeMovement : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
     public GameObject leftButton;
     public GameObject RightButton;
     bool isPressed = false;
-    ///public GameObject Snake;
-
-    /*/// <summary>
-    /// Hides the snake.
-    /// </summary>
-    public void Hide()
-    {
-        foreach (var p in body)
-        {
-            board[p].ContentHidden = true;
-        }
-    }
-
-    /// <summary>
-    /// Shows the snake.
-    /// </summary>
-    public void Show()
-    {
-        foreach (var p in body)
-        {
-            board[p].ContentHidden = false;
-        }
-    }*/
 
     // Start is called before the first frame update
     void Start()
