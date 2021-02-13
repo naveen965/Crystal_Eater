@@ -2,12 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-/*using Unity.Entities;
-using Unity.Mathematics;
-using Unity.Tiny.Core2D;
-using Unity.Tiny.Input;*/
 
-public class SnakeMovement : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
+public class Snake : MonoBehaviour
 {
     public List<Transform> BodyParts = new List<Transform>();
     public float mindistance = 0.25f;
@@ -18,14 +14,11 @@ public class SnakeMovement : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
     private float dis;
     private Transform curBodyPart;
     private Transform PrevBodypart;
-    public GameObject leftButton;
-    public GameObject RightButton;
-    bool isPressed = false;
 
     // Start is called before the first frame update
     void Start()
     {
-        for(int i =0; i < beginsize - 1; i++)
+        for (int i = 0; i < beginsize - 1; i++)
         {
             AddBodyPart();
         }
@@ -36,40 +29,8 @@ public class SnakeMovement : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
     {
         Move();
 
-        if (isPressed && leftButton)
-        {
-            RotateLeft();
-        }
-
-        if (isPressed && RightButton)
-        {
-            RotateRight();
-        }
-
         if (Input.GetKey(KeyCode.Q))
             AddBodyPart();
-    }
-
-    public void OnPointerDown(PointerEventData eventData)
-    {
-        isPressed = true;
-    }
-
-    public void OnPointerUp(PointerEventData eventData)
-    {
-        isPressed = false;
-    }
-
-    public void RotateLeft()
-    {
-        if (Input.GetMouseButton(0))
-            BodyParts[0].Rotate(Vector3.back * rotationspeed * Time.deltaTime * Input.GetAxis("Horizontal"));
-    }
-
-    public void RotateRight()
-    {
-        if (Input.GetMouseButton(0))
-            BodyParts[0].Rotate(Vector3.back * rotationspeed * Time.deltaTime * Input.GetAxis("Horizontal"));
     }
 
     public void Move()
@@ -81,19 +42,11 @@ public class SnakeMovement : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
 
         BodyParts[0].Translate(BodyParts[0].up * curspeed * Time.smoothDeltaTime, Space.World);
 
-        /*if (Input.GetKey(KeyCode.A))
-            BodyParts[0].Rotate(new Vector3(0f, 0f, -1f) * rotationspeed * Time.deltaTime * Input.GetAxis("Horizontal"));
-        if (Input.GetKey(KeyCode.D))
-            BodyParts[0].Rotate(new Vector3(0f, 0f, 1f) * rotationspeed * Time.deltaTime * Input.GetAxis("Horizontal"));*/
-
         if (Input.GetKey(KeyCode.A))
             BodyParts[0].Rotate(Vector3.back * rotationspeed * Time.deltaTime * Input.GetAxis("Horizontal"));
 
         if (Input.GetKey(KeyCode.D))
             BodyParts[0].Rotate(Vector3.back * rotationspeed * Time.deltaTime * Input.GetAxis("Horizontal"));
-
-        /*if (Input.GetMouseButton(0))
-            BodyParts[0].Rotate(Vector3.back * rotationspeed * Time.deltaTime * Input.GetAxis("Horizontal"));*/
 
         for (int i = 1; i < BodyParts.Count; i++)
         {
@@ -113,7 +66,6 @@ public class SnakeMovement : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
 
             curBodyPart.position = Vector3.Slerp(curBodyPart.position, newpos, T);
             curBodyPart.rotation = Quaternion.Slerp(curBodyPart.rotation, PrevBodypart.rotation, T);
-
         }
     }
 
@@ -124,13 +76,5 @@ public class SnakeMovement : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
         newpart.SetParent(transform);
 
         BodyParts.Add(newpart);
-    }
-
-    public void WithoutTail()
-    {
-        for (int i = 1; i < BodyParts.Count; i++)
-        {
-            BodyParts[0] = BodyParts[i];
-        }
     }
 }

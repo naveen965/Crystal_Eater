@@ -176,20 +176,23 @@ public class Game : MonoBehaviour
     {
         if (!Paused && snake != null)
         {
-            var dir = controller.NextDirection();
+            //var dir = controller.NextDirection();
 
             // New head position
-            var head = snake.NextHeadPosition(dir);
+            var head = snakeMovement.BodyParts[0];
             //var head1 = snakeMovement.
 
-            var x = head.x;
-            var y = head.y;
+            /*var x = head.x;
+            var y = head.y;*/
 
-            if (snake.WithoutTail.Contains(head))
+            for (int i = 1; i < snakeMovement.BodyParts.Count; i++)
             {
-                // Snake has bitten its tail - game over
-                StartCoroutine(GameOverCoroutine());
-                return;
+                if (snakeMovement.BodyParts[0] == snakeMovement.BodyParts[i])
+                {
+                    // Snake has bitten its tail - game over
+                    StartCoroutine(GameOverCoroutine());
+                    return;
+                }
             }
 
             /*if (timeCountDown.SecondsLeft == 0)
@@ -201,20 +204,20 @@ public class Game : MonoBehaviour
 
             /// x >= 0 && x < Board.Columns && y >= 0 && y < Board.Rows
 
-            if (x >= 0 && x < Board.Columns && y >= 0 && y < Board.Rows)
+            if (timeCountDown.SecondsLeft == 0)
             {
-                if (head == applePosition)
+                if (true)
                 {
                     soundManager.PlayAppleSoundEffect();
-                    snake.Move(dir, true);
+                    snakeMovement.Move();
                     Score += 1;
                     timeCountDown.SecondsLeft += 2;
                     PlantAnApple();
                 }
-                else if (head == bonusPosition && bonusActive)
+                else if (true)
                 {
                     soundManager.PlayBonusSoundEffect();
-                    snake.Move(dir, true);
+                    snakeMovement.Move();
                     Score += 10;
                     timeCountDown.SecondsLeft += 5;
                     StopCoroutine(bonusCoroutine);
@@ -222,7 +225,7 @@ public class Game : MonoBehaviour
                 }
                 else
                 {
-                    snake.Move(dir, false);
+                    snakeMovement.Move();
                 }
             }
             else
